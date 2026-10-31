@@ -203,6 +203,8 @@ Joining encounters to cost_transparency (benchmark_* columns) on year + facility
 3. benchmark money columns are text (e.g. $134,331.45); convert before doing arithmetic.
 
 Scope: cost_transparency only covers 2021, so other years (e.g. 2018) never get a benchmark.
+
+With that, I, Mohamed Ahmed Rashed, have completed the cost transparency dimension.
 */
 
 GO;
