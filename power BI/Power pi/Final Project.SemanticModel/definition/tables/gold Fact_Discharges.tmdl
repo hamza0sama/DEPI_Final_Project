@@ -1,0 +1,227 @@
+table 'gold Fact_Discharges'
+	lineageTag: b31e58f5-7f92-4ed2-9b5d-1b271e970b82
+
+	column DischargeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e0dfd97b-9337-4149-b83e-b2eab58cab6d
+		summarizeBy: count
+		sourceColumn: DischargeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column HospitalDischargesKey_NK
+		dataType: string
+		lineageTag: a8e440d3-adb9-4923-b25c-83195fc63d6f
+		summarizeBy: none
+		sourceColumn: HospitalDischargesKey_NK
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 87d5989f-cac3-4ec7-9de0-02783a2abb05
+		summarizeBy: none
+		sourceColumn: YearKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FacilityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 92646909-e689-4b29-afc4-e35a02ab1172
+		summarizeBy: none
+		sourceColumn: FacilityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f1b3807-f306-4eca-a1f1-236c80fce116
+		summarizeBy: none
+		sourceColumn: PatientKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AdmissionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 52edd4bf-1eea-4cb5-b744-91dfb18c8469
+		summarizeBy: none
+		sourceColumn: AdmissionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a27d37b7-79d1-4c41-bf33-7be0240082f1
+		summarizeBy: none
+		sourceColumn: PaymentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiagnosisKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d2d5626f-4f79-4bbd-928b-1cf526ac46a0
+		summarizeBy: none
+		sourceColumn: DiagnosisKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcedureKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bfdd699-64ca-43f0-9758-77abc105e220
+		summarizeBy: none
+		sourceColumn: ProcedureKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprDrgKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a4103e79-4f92-4bf0-8613-e009273ff685
+		summarizeBy: none
+		sourceColumn: AprDrgKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprMdcKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bff01c4f-1678-496b-9191-a7cc4667b613
+		summarizeBy: none
+		sourceColumn: AprMdcKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 93c01f6b-6178-44a3-b2ae-7a4c67a1dcf0
+		summarizeBy: none
+		sourceColumn: SeverityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedicalSurgicalKey
+		dataType: int64
+		formatString: 0
+		lineageTag: efd817d7-7ab1-426e-894a-f43dcbd5fe6a
+		summarizeBy: none
+		sourceColumn: MedicalSurgicalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LengthOfStay
+		dataType: int64
+		formatString: 0
+		lineageTag: 71aa42c1-d213-4aec-a3a1-70af792acc67
+		summarizeBy: average
+		sourceColumn: LengthOfStay
+
+		annotation SummarizationSetBy = User
+
+	column TotalCharges
+		dataType: double
+		lineageTag: 237edd55-7a3e-4600-8b36-2715a19fe438
+		summarizeBy: sum
+		sourceColumn: TotalCharges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalCosts
+		dataType: double
+		lineageTag: 2e340aae-9095-4119-a12f-9e118d3d5bec
+		summarizeBy: sum
+		sourceColumn: TotalCosts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostToChargeRatio
+		dataType: double
+		lineageTag: fdf17f4c-af56-4197-a842-9e3e757d91af
+		summarizeBy: sum
+		sourceColumn: CostToChargeRatio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostChargeDifference
+		dataType: double
+		lineageTag: 810d0c86-dfb9-4f19-bd91-3e5edccca28c
+		summarizeBy: sum
+		sourceColumn: CostChargeDifference
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsNeonate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 18ea1dc2-f5da-4c8a-b2e9-4b0a5445ee51
+		summarizeBy: none
+		sourceColumn: IsNeonate
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasSecondaryInsurance
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b7ff3879-ea6f-4f3c-87a5-22ba88a02797
+		summarizeBy: none
+		sourceColumn: HasSecondaryInsurance
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasProcedure
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3a091c63-2d22-4cd7-b2ed-02d1b48fefbb
+		summarizeBy: none
+		sourceColumn: HasProcedure
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoadDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c27cef0-975a-4b7d-9304-b5fc30406401
+		summarizeBy: none
+		sourceColumn: LoadDate
+
+		variation Variation
+			isDefault
+			relationship: 21352086-d49e-4c3f-a9f9-a672f95d13b7
+			defaultHierarchy: LocalDateTable_6f4f3d2c-2a79-4a63-b5e6-242e249299d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'gold Fact_Discharges' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Fact_Discharges = Source{[Schema="gold",Item="Fact_Discharges"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Fact_Discharges,{"gold.Dim_Admission", "gold.Dim_AprDrg", "gold.Dim_AprMdc", "gold.Dim_Diagnosis", "gold.Dim_Facility", "gold.Dim_MedicalSurgical", "gold.Dim_Patient", "gold.Dim_Payment", "gold.Dim_Procedure", "gold.Dim_Severity", "gold.Dim_Year"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"LoadDate", type date}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type",{"BirthWeight"})
+				in
+				    #"Removed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

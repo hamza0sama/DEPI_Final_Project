@@ -1,0 +1,34 @@
+table 'gold Dim_MedicalSurgical'
+	lineageTag: cd1cd5ba-67ab-4184-ab74-b83fd32d3c04
+
+	column MedicalSurgicalKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 72ac553f-3079-4973-b007-8f4de0226d95
+		summarizeBy: none
+		sourceColumn: MedicalSurgicalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprMedicalSurgicalDescription
+		dataType: string
+		lineageTag: d8df8178-f3ed-4f6f-8499-b6b41c27a973
+		summarizeBy: none
+		sourceColumn: AprMedicalSurgicalDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_MedicalSurgical' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_MedicalSurgical = Source{[Schema="gold",Item="Dim_MedicalSurgical"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_MedicalSurgical,{"gold.Fact_CostTransparency", "gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

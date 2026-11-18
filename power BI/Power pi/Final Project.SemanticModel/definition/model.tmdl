@@ -1,0 +1,37 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["gold Dim_Admission","gold Dim_AprDrg","gold Dim_AprMdc","gold Dim_Cooperator","gold Dim_Diagnosis","gold Dim_Facility","gold Dim_MedicalSurgical","gold Dim_Operator","gold Dim_Patient","gold Dim_Payment","gold Dim_Procedure","gold Dim_Severity","gold Dim_Year","gold Fact_Discharges","gold Bridge_Facility_Cooperator","gold Bridge_Facility_Operator"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'gold Dim_Admission'
+ref table 'gold Dim_AprDrg'
+ref table 'gold Dim_AprMdc'
+ref table 'gold Dim_Cooperator'
+ref table 'gold Dim_Diagnosis'
+ref table 'gold Dim_Facility'
+ref table DateTableTemplate_d8f4cfb8-cff4-461c-851a-edbf66cc8876
+ref table LocalDateTable_cfb4dbd1-f763-40d4-b2ac-f0d1c7f3d566
+ref table 'gold Dim_MedicalSurgical'
+ref table 'gold Dim_Operator'
+ref table 'gold Dim_Patient'
+ref table 'gold Dim_Payment'
+ref table 'gold Dim_Procedure'
+ref table 'gold Dim_Severity'
+ref table 'gold Dim_Year'
+ref table 'gold Fact_Discharges'
+ref table LocalDateTable_6f4f3d2c-2a79-4a63-b5e6-242e249299d2
+ref table 'gold Bridge_Facility_Cooperator'
+ref table 'gold Bridge_Facility_Operator'
+
+ref cultureInfo en-US
+

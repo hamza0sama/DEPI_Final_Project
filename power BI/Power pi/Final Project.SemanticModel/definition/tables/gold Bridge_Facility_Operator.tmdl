@@ -1,0 +1,35 @@
+table 'gold Bridge_Facility_Operator'
+	lineageTag: be8c6c9d-d9b4-43cf-bd93-6b379ddff595
+
+	column FacilityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 3e0bc819-afbf-412f-a35c-78ea3ff58ad8
+		summarizeBy: none
+		sourceColumn: FacilityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OperatorKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 47cdadbb-ceed-4c79-8f2d-4ec12ab61204
+		summarizeBy: none
+		sourceColumn: OperatorKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Bridge_Facility_Operator' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Bridge_Facility_Operator = Source{[Schema="gold",Item="Bridge_Facility_Operator"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Bridge_Facility_Operator,{"gold.Dim_Facility", "gold.Dim_Operator"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

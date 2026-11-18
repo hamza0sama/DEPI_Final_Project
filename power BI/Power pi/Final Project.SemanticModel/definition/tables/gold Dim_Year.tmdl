@@ -1,0 +1,35 @@
+table 'gold Dim_Year'
+	lineageTag: b5a2ce1c-7a1c-434e-87f2-299800500a84
+
+	column YearKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9554248e-65d4-40c7-b358-3982a858b0cd
+		summarizeBy: none
+		sourceColumn: YearKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 56e31a33-812a-4052-a14c-0fe415fd61fd
+		summarizeBy: none
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Year' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Year = Source{[Schema="gold",Item="Dim_Year"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Year,{"gold.Fact_CostTransparency", "gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

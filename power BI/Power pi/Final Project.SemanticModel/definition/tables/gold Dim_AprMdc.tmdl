@@ -1,0 +1,45 @@
+table 'gold Dim_AprMdc'
+	lineageTag: a66750f6-b50e-4570-9b5b-3a5b8d8c0d54
+
+	column AprMdcKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 36ba5a0d-149c-409f-9cac-d9b10204540a
+		summarizeBy: none
+		sourceColumn: AprMdcKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprMdcCode
+		dataType: int64
+		formatString: 0
+		lineageTag: fb32cc32-33d8-4592-9fd6-000cf564a5dc
+		summarizeBy: none
+		sourceColumn: AprMdcCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprMdcDescription
+		dataType: string
+		lineageTag: 586f60c6-1d50-4f9d-b249-d1abe7d9523e
+		summarizeBy: none
+		sourceColumn: AprMdcDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_AprMdc' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_AprMdc = Source{[Schema="gold",Item="Dim_AprMdc"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_AprMdc,{"gold.Fact_Discharges"}),
+				    #"Removed Bottom Rows" = Table.RemoveLastN(#"Removed Columns",1),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Bottom Rows",{{"AprMdcCode", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

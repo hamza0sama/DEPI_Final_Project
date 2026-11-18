@@ -1,0 +1,66 @@
+table 'gold Dim_Patient'
+	lineageTag: 6bc2ef58-a92b-4c8f-bf2c-4ad6a3899031
+
+	column PatientKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 67d53729-56bf-42b2-93c2-ba6c98b62802
+		summarizeBy: none
+		sourceColumn: PatientKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgeGroup
+		dataType: string
+		lineageTag: a7785e77-02bc-4a6e-947e-62aaeddbdeb7
+		summarizeBy: none
+		sourceColumn: AgeGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 0f4b37e9-6bbf-4d2c-9b85-dfe0e0c4481a
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Race
+		dataType: string
+		lineageTag: 7d80a77b-9dad-4b31-93a3-8141107c0640
+		summarizeBy: none
+		sourceColumn: Race
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ethnicity
+		dataType: string
+		lineageTag: 8e40a1bb-8644-4aff-adbd-a3459f2ad0f8
+		summarizeBy: none
+		sourceColumn: Ethnicity
+
+		annotation SummarizationSetBy = Automatic
+
+	column ZipCode3Digits
+		dataType: string
+		lineageTag: 592de997-c729-4d57-a6e6-7f26926fc4fa
+		summarizeBy: none
+		sourceColumn: ZipCode3Digits
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Patient' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Patient = Source{[Schema="gold",Item="Dim_Patient"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Patient,{"gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

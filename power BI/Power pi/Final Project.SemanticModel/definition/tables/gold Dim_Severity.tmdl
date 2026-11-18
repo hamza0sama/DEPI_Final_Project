@@ -1,0 +1,52 @@
+table 'gold Dim_Severity'
+	lineageTag: 1f25b0e6-5d06-406d-b041-2ac6f2893a38
+
+	column AprSeverityOfIllnessCode
+		dataType: int64
+		formatString: 0
+		lineageTag: b292f670-0604-45fb-946f-218383f0dddb
+		summarizeBy: none
+		sourceColumn: AprSeverityOfIllnessCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprSeverityOfIllnessDescription
+		dataType: string
+		lineageTag: 9a77b7f6-c92b-4b63-854d-6b7c8e671a9a
+		summarizeBy: none
+		sourceColumn: AprSeverityOfIllnessDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprRiskOfMortality
+		dataType: string
+		lineageTag: 60b6e85e-061e-42f1-8e88-8a2ad39f1109
+		summarizeBy: none
+		sourceColumn: AprRiskOfMortality
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c7cabf3-a19c-4bf1-98da-00791e85a55e
+		summarizeBy: none
+		sourceColumn: SeverityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Severity' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Severity = Source{[Schema="gold",Item="Dim_Severity"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(gold_Dim_Severity,{{"AprSeverityOfIllnessCode", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"gold.Fact_CostTransparency", "gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

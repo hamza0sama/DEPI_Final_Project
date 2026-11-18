@@ -1,0 +1,69 @@
+table 'gold Dim_Cooperator'
+	lineageTag: 544510ce-45dc-4d4b-9ba9-5efe56f8aa0b
+
+	column CooperatorKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 98141fb3-d22b-4865-a9d5-72dda14f5250
+		summarizeBy: none
+		sourceColumn: CooperatorKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cooperator_Key_NK
+		dataType: int64
+		formatString: 0
+		lineageTag: 0b26ec13-8c3d-427a-85cb-94c5cd18cdbf
+		summarizeBy: none
+		sourceColumn: Cooperator_Key_NK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cooperator_Name
+		dataType: string
+		lineageTag: 337c94f4-04de-4ee1-83f7-1a963280c9df
+		summarizeBy: none
+		sourceColumn: Cooperator_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cooperator_Address
+		dataType: string
+		lineageTag: 997021f9-935f-4a74-9aa0-f28985948b36
+		summarizeBy: none
+		sourceColumn: Cooperator_Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cooperator_City
+		dataType: string
+		lineageTag: b448ec4f-9679-483c-bf3c-d8bfa65f703a
+		summarizeBy: none
+		sourceColumn: Cooperator_City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cooperator_Zip_Code
+		dataType: int64
+		formatString: 0
+		lineageTag: 4691a0d8-0441-4fbc-b49e-b67275a0af97
+		summarizeBy: none
+		sourceColumn: Cooperator_Zip_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Cooperator' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Cooperator = Source{[Schema="gold",Item="Dim_Cooperator"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Cooperator,{"Cooperator_Address_2", "Cooperator_State", "gold.Bridge_Facility_Cooperator"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"Cooperator_Key_NK", Int64.Type}, {"Cooperator_Zip_Code", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
