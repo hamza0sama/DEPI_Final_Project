@@ -1,0 +1,34 @@
+table 'gold Dim_Payment'
+	lineageTag: 7309a168-5107-4e67-8e70-7f1ef9741c78
+
+	column PaymentKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c97150d-6b57-440f-99a4-8f16750e9a13
+		summarizeBy: none
+		sourceColumn: PaymentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentTypology1
+		dataType: string
+		lineageTag: d008c287-1fb2-4831-ae4c-2631d2e0fe2c
+		summarizeBy: none
+		sourceColumn: PaymentTypology1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Payment' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Payment = Source{[Schema="gold",Item="Dim_Payment"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Payment,{"gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

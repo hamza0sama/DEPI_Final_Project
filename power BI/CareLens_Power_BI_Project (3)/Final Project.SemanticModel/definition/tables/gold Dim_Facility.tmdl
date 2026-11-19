@@ -1,0 +1,239 @@
+table 'gold Dim_Facility'
+	lineageTag: 78d11f6c-5f72-4201-b218-a90ebf5ff09a
+
+	column Facility_ID
+		dataType: string
+		lineageTag: d0ec6cfc-acad-4adb-afee-dada72d239a4
+		summarizeBy: none
+		sourceColumn: Facility_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Name
+		dataType: string
+		lineageTag: 913e931b-b5b9-4702-abb0-054a57244c6c
+		summarizeBy: none
+		sourceColumn: Facility_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Type_Code
+		dataType: string
+		lineageTag: 2833f206-61d4-43b8-a51f-5f4df49f759a
+		summarizeBy: none
+		sourceColumn: Facility_Type_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Type
+		dataType: string
+		lineageTag: 57605667-abc7-45a5-9b7c-964d27452f29
+		summarizeBy: none
+		sourceColumn: Facility_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Category
+		dataType: string
+		lineageTag: 7e64cd65-e466-4232-b1dc-90decb739bb1
+		summarizeBy: none
+		sourceColumn: Facility_Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Open_Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a63db7da-e3a6-426d-9ed5-56b7006f7c29
+		summarizeBy: none
+		sourceColumn: Facility_Open_Date
+
+		variation Variation
+			isDefault
+			relationship: 6901d777-6d6f-4857-b59f-30f17a41d4c0
+			defaultHierarchy: LocalDateTable_cfb4dbd1-f763-40d4-b2ac-f0d1c7f3d566.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Is_Open_Date_Missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7f14f068-2ee4-40c1-818b-9ee5334a3ec2
+		summarizeBy: none
+		sourceColumn: Is_Open_Date_Missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column Opened_After_Data_Period
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 25910499-b9fc-4234-80f8-318053b6dac0
+		summarizeBy: none
+		sourceColumn: Opened_After_Data_Period
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Address_1
+		dataType: string
+		lineageTag: 37d99aff-b546-40ba-937e-e782a40ac437
+		summarizeBy: none
+		sourceColumn: Facility_Address_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_City
+		dataType: string
+		lineageTag: 20b1ec47-d150-4800-bda2-a633cbe54097
+		summarizeBy: none
+		sourceColumn: Facility_City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Zip_Code
+		dataType: int64
+		formatString: 0
+		lineageTag: 4249c5e0-942b-44ec-88b4-ac92d3d091e9
+		summarizeBy: count
+		sourceColumn: Facility_Zip_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_County_Code
+		dataType: int64
+		formatString: 0
+		lineageTag: c0951739-6db7-4880-a2a9-aff1e0cf0039
+		summarizeBy: count
+		sourceColumn: Facility_County_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_County
+		dataType: string
+		lineageTag: 9348b3ed-cc45-45ad-b5c0-06f0493dc5e7
+		summarizeBy: none
+		sourceColumn: Facility_County
+
+		annotation SummarizationSetBy = Automatic
+
+	column Regional_Office_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: bfc736f5-b9ff-415f-8f6a-122958841972
+		summarizeBy: count
+		sourceColumn: Regional_Office_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Regional_Office
+		dataType: string
+		lineageTag: badcd5cd-f94e-4209-b1d9-52a36227858a
+		summarizeBy: none
+		sourceColumn: Regional_Office
+
+		annotation SummarizationSetBy = Automatic
+
+	column Main_Site_Name
+		dataType: string
+		lineageTag: a574d409-0fd6-4ec1-95b3-783fd7ffd64a
+		summarizeBy: none
+		sourceColumn: Main_Site_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Main_Site_Facility_ID
+		dataType: string
+		lineageTag: f23a0c06-009d-4852-bb3f-022c72ae788b
+		summarizeBy: none
+		sourceColumn: Main_Site_Facility_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operating_Certificate_Number
+		dataType: string
+		lineageTag: 57d01203-dee1-40b1-bcd4-37da53e8cfa9
+		summarizeBy: none
+		sourceColumn: Operating_Certificate_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Latitude
+		dataType: double
+		lineageTag: 8e0d71cf-3e02-4c1b-9232-5386745dd600
+		dataCategory: Latitude
+		summarizeBy: sum
+		sourceColumn: Facility_Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Facility_Longitude
+		dataType: double
+		lineageTag: c7ad89f8-1d3d-4647-a75d-34a9b8e64499
+		dataCategory: Longitude
+		summarizeBy: sum
+		sourceColumn: Facility_Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Is_Location_Missing
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: bf7de94c-6ff4-45f3-8bd0-7df73f5f74b5
+		summarizeBy: none
+		sourceColumn: Is_Location_Missing
+
+		annotation SummarizationSetBy = Automatic
+
+	column FacilityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: ffec4bf7-745e-49b5-ad1c-6556fa569e13
+		summarizeBy: none
+		sourceColumn: FacilityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Phone_Number
+		dataType: string
+		lineageTag: b48b7add-21f1-4ea1-8f75-9a63292e9557
+		summarizeBy: none
+		sourceColumn: Facility_Phone_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facility_Fax_Number
+		dataType: string
+		lineageTag: c019e462-77b5-482c-97aa-185286d96708
+		summarizeBy: none
+		sourceColumn: Facility_Fax_Number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Facility' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Facility = Source{[Schema="gold",Item="Dim_Facility"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Facility,{"gold.Bridge_Facility_Cooperator", "gold.Bridge_Facility_Operator", "gold.Fact_CostTransparency", "gold.Fact_Discharges"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Removed Columns",{"Facility_State"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns1",{{"Facility_Open_Date", type date}}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Changed Type",{"Facility_Address_2"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns2",{{"Facility_Zip_Code", Int64.Type}}),
+				    #"Removed Top Rows" = Table.Skip(#"Changed Type1",1),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Removed Top Rows",{{"Regional_Office_ID", Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type2", each true),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Filtered Rows",{{"Facility_County_Code", Int64.Type}}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Changed Type3",{"Facility_Website"})
+				in
+				    #"Removed Columns3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

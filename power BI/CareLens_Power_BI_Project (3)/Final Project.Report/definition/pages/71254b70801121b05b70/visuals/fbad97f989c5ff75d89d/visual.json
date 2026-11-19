@@ -1,0 +1,239 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "fbad97f989c5ff75d89d",
+  "position": {
+    "x": 196,
+    "y": 440,
+    "z": 2400,
+    "height": 248,
+    "width": 709,
+    "tabOrder": 2400
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Dim_Year"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "gold Dim_Year.Year",
+              "nativeQueryRef": "Year",
+              "displayName": "Year",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Total Discharges"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Total Discharges",
+              "nativeQueryRef": "Total Discharges",
+              "displayName": "Discharges",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Total Charges"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Total Charges",
+              "nativeQueryRef": "Total Charges",
+              "displayName": "Charges ($)",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Total Costs"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Total Costs",
+              "nativeQueryRef": "Total Costs",
+              "displayName": "Costs ($)",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Average Cost per Discharge"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Average Cost per Discharge",
+              "nativeQueryRef": "Average Cost per Discharge",
+              "displayName": "Avg cost ($)",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Average LOS"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Average LOS",
+              "nativeQueryRef": "Average LOS",
+              "displayName": "Avg LOS",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Emergency Share"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Emergency Share",
+              "nativeQueryRef": "Emergency Share",
+              "displayName": "Emergency %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Procedure Share"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Procedure Share",
+              "nativeQueryRef": "Procedure Share",
+              "displayName": "Procedure %",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Neonatal Share"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Neonatal Share",
+              "nativeQueryRef": "Neonatal Share",
+              "displayName": "Neonatal %",
+              "active": true
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold Dim_Year"
+                  }
+                },
+                "Property": "Year"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Year summary: volume, money and mix'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0F172A'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

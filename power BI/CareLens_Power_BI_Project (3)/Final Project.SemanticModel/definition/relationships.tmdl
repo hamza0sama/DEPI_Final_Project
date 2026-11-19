@@ -1,0 +1,84 @@
+relationship 6901d777-6d6f-4857-b59f-30f17a41d4c0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'gold Dim_Facility'.Facility_Open_Date
+	toColumn: LocalDateTable_cfb4dbd1-f763-40d4-b2ac-f0d1c7f3d566.Date
+
+relationship 21352086-d49e-4c3f-a9f9-a672f95d13b7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'gold Fact_Discharges'.LoadDate
+	toColumn: LocalDateTable_6f4f3d2c-2a79-4a63-b5e6-242e249299d2.Date
+
+relationship 68d87549-02a4-4d11-a550-ad8636ae45fe
+	fromColumn: 'gold Fact_Discharges'.AdmissionKey
+	toColumn: 'gold Dim_Admission'.AdmissionKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship a03f2e35-22f4-41fd-9ecc-23bb815b6581
+	fromColumn: 'gold Fact_Discharges'.DiagnosisKey
+	toColumn: 'gold Dim_Diagnosis'.DiagnosisKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship c34d2467-0150-4746-acda-48b6b5db6f3b
+	fromColumn: 'gold Fact_Discharges'.MedicalSurgicalKey
+	toColumn: 'gold Dim_MedicalSurgical'.MedicalSurgicalKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 0133114b-d9d9-4d00-9481-ce96b9ed1a45
+	fromColumn: 'gold Fact_Discharges'.PatientKey
+	toColumn: 'gold Dim_Patient'.PatientKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship c55a2e99-6611-4a43-ab18-7a34c92cf44d
+	fromColumn: 'gold Fact_Discharges'.PaymentKey
+	toColumn: 'gold Dim_Payment'.PaymentKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship 398e6f56-ca14-4d7d-b853-e6504c9f9693
+	fromColumn: 'gold Fact_Discharges'.ProcedureKey
+	toColumn: 'gold Dim_Procedure'.ProcedureKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship ed006988-0017-441a-bf28-183c93969d9f
+	fromColumn: 'gold Fact_Discharges'.YearKey
+	toColumn: 'gold Dim_Year'.YearKey
+
+	annotation PBI_IsFromSource = FS
+
+relationship d58c402f-9d3c-f45f-ddde-b0bb4e49d625
+	fromColumn: 'gold Fact_Discharges'.AprMdcKey
+	toColumn: 'gold Dim_AprMdc'.AprMdcKey
+
+relationship 336b4372-0868-d867-d54b-6faa679dbd0f
+	fromColumn: 'gold Bridge_Facility_Cooperator'.CooperatorKey
+	toColumn: 'gold Dim_Cooperator'.CooperatorKey
+
+relationship 94e11bfe-df4c-21c3-71dd-ef22085925e6
+	fromColumn: 'gold Bridge_Facility_Cooperator'.FacilityKey
+	toColumn: 'gold Dim_Facility'.FacilityKey
+
+relationship 3f865c50-35b2-3bab-39e0-63e9989a98db
+	fromColumn: 'gold Bridge_Facility_Operator'.FacilityKey
+	toColumn: 'gold Dim_Facility'.FacilityKey
+
+relationship 7d349ba6-2baf-3e03-443f-43d0f0590dcf
+	fromColumn: 'gold Bridge_Facility_Operator'.OperatorKey
+	toColumn: 'gold Dim_Operator'.OperatorKey
+
+relationship 405aa391-0606-f2fa-a08e-708112efb80f
+	fromColumn: 'gold Fact_Discharges'.FacilityKey
+	toColumn: 'gold Dim_Facility'.FacilityKey
+
+relationship 5727d79b-b546-1b5f-eafb-69386e68f4b9
+	fromColumn: 'gold Fact_Discharges'.AprDrgKey
+	toColumn: 'gold Dim_AprDrg'.AprDrgKey
+
+relationship 2ba8a370-ea46-b340-3375-5fe555d34ed9
+	fromColumn: 'gold Fact_Discharges'.SeverityKey
+	toColumn: 'gold Dim_Severity'.SeverityKey
+

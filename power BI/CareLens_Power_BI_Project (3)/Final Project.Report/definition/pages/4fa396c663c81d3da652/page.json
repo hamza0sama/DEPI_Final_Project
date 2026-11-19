@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "4fa396c663c81d3da652",
+  "displayName": "05 Diagnosis and Procedure",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280
+}
