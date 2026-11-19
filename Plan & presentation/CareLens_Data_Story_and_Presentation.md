@@ -69,71 +69,120 @@ These are not presentation failures; they are important data-product findings. T
 | Tell the vulnerable-population story | 9. Neonatal & Birth Weight | Taqeyy | Shows neonatal volume, outcomes, cost, severity, and payer context; the birth-weight views are not built because the field is missing, and the page says so. |
 | Close with change and action | 10. Trends, Growth & Forecasting | Taqeyy | Shows year-over-year movement, mix changes, facility/diagnosis growth, and scenario cards for the next period (flat, and latest growth repeated). |
 
+### Linking the dashboards: the handover map
+
+Each dashboard ends by handing the audience a question that the next dashboard answers. The table shows what is handed over at every link, who says it, and what carries across on screen. The spoken bridge line for each link is in section 4, at the end of the block it closes.
+
+| Link | Speaker | What the audience has just seen | Question handed to the next page | What carries across |
+|---|---|---|---|---|
+| Opening to 1 | Hamza | The decision problem and the five questions | How large is the inpatient system? | The five questions from section 1 act as the agenda for the whole talk. |
+| 1 to 2 | Hamza | Scale: discharges, charges, costs, average LOS, year comparison | How much of that scale is money, and is a charge the same as a cost? | Same Year selection. The charges and costs totals on page 1 become the cards on page 2. |
+| 2 to 3 | Hamza to Seif el deen | Charges versus costs, and where the gap and the cost per case are highest | Is the cost pressure about price, or about how long patients occupy beds? | Average cost per discharge on page 2 links to the LOS-versus-cost view on page 3. |
+| 3 to 4 | Seif el deen | Admission pathways, LOS bands, dispositions and the long-stay groups | Who are the patients behind these flows, and who pays for their care? | Admission type on page 3 becomes age group and primary payer on page 4. |
+| 4 to 5 | Seif el deen to Mohamed Rashed | Who uses the system, where they come from and how payer mix differs | Which conditions and procedures sit behind these volumes? | Age group appears on pages 4 and 5 but is not synced, so set it again on page 5 if it was filtered. |
+| 5 to 6 | Mohamed Rashed | Top diagnoses and procedures by volume, total cost and cost per case | Why do some cohorts use more resources: what clinical complexity is behind it? | The total-cost decomposition tree on page 5 leads to cost and LOS by severity on page 6. |
+| 6 to 7 | Mohamed Rashed to Mohamed Abd El Qader | The severity gradient, risk of mortality, top APR-DRGs and MDCs, medical versus surgical | Where is this burden located? | Severity mix on page 6 becomes "busy versus high-burden" sites on page 7. |
+| 7 to 8 | Mohamed Abd El Qader | Hotspots by county, region and facility, plus the data-quality cards | Do ownership and operator context help explain the differences between sites? | Facility type and county filters stay on. The facility list on page 7 leads to operators and ownership on page 8. |
+| 8 to 9 | Mohamed Abd El Qader to Taqeyy | Operator and ownership comparisons; the price benchmark is not built | Is there a small, high-intensity cohort that the all-discharge averages hide? | Same Year, Facility type and County filters. Facility concentration on page 7 leads to neonatal facility concentration on page 9. |
+| 9 to 10 | Taqeyy | The neonatal cohort: volume, LOS, cost, severity and payer mix | How stable are these patterns over time, and what should we plan for? | Clear the Year slicer first, so the trend charts on page 10 show all four years. |
+| 10 to synthesis | Taqeyy to Hamza or the team | Year-over-year change and the scenario cards | What do the ten pages tell us together, and what should we do? | Return to page 1 with the filters cleared, so the headline numbers can be restated. |
+
+#### How the filter context carries from page to page
+
+- The **Year**, **Facility type** and **County** slicers are synced across all ten pages. Set them once on page 1 and the next page opens with the same selection. **Regional office** is synced on pages 1, 7 and 10 only.
+- The page-specific slicers (payment type, admission type, age group, medical/surgical, ownership type, severity) are not synced. Reset them when you move on if the next page looks unexpectedly filtered.
+- The pages sit in story order in the report, 1 to 10, so the tabs can be clicked left to right. The report has no navigation buttons.
+- Start the walkthrough with Year, Facility type and County cleared. Change them only on purpose, and say out loud when you do.
+
 ## 4. Recommended presentation sequence and timing
 
 The order below is optimized for a 10-15 minute presentation, not for dashboard-number order alone.
+
+Each block ends with a **Transition** line: the sentence that closes the current dashboard and opens the next one. A transition takes about 10-15 seconds and is spoken inside the block it closes, so the timings below do not change. Where the speaker changes, the transition names both people. The incoming speaker then opens by reading the page header's decision question aloud, before the first number, so the audience hears how the new page answers the question just handed over.
 
 ### 0:00-0:45 - Opening: the decision problem
 
 **Speaker:** Hamza  
 Introduce CareLens as an operational decision-support view for inpatient discharges. State that the project answers: *How much demand exists, where is it concentrated, what makes it expensive or capacity-intensive, and what should managers investigate next?*
 
+**Transition to Dashboard 1:** "Everything we show is one story told across ten pages, and it starts with the size of the system."
+
 ### 0:45-2:00 - Establish the baseline
 
 **Speaker:** Hamza, Dashboard 1  
 Show total discharges, total charges, total costs, average cost per discharge, average LOS, and the year comparison. Mention emergency, procedure, neonatal, and top-facility shares as context.
 
-**Transition:** "The total is only the starting point. We now need to separate operating volume from financial pressure."
+**Transition to Dashboard 2:** "The total is only the starting point. We now need to separate operating volume from financial pressure."
 
 ### 2:00-3:00 - Financial pressure
 
 **Speaker:** Hamza, Dashboard 2  
 Use one charges-versus-costs trend and one facility/diagnosis outlier view. Explain that a high charge is not automatically a high cost and that the cost-to-charge ratio is a benchmarking signal, not a quality score.
 
+**Transition to Dashboard 3 (Hamza to Seif el deen):** "Now that we know the size and money involved, we need to understand the patient flow creating that burden." Hamza then hands over to Seif el deen.
+
 ### 3:00-4:15 - Patient flow and capacity
 
 **Speaker:** Seif el deen, Dashboard 3  
 Show admission type, LOS distribution, disposition, emergency versus non-emergency LOS, and the LOS-cost relationship. Emphasize that longer-stay cohorts create bed-day pressure even when their discharge count is not the largest.
+
+**Transition to Dashboard 4:** "The system burden is shaped not only by how many patients arrive, but by how long they stay and by the population and payer mix."
 
 ### 4:15-5:15 - Population and payer context
 
 **Speaker:** Seif el deen, Dashboard 4  
 Show age, gender/race/ethnicity, payment mix, secondary insurance, and geographic origin. Use this to explain who is behind the aggregate demand and how payer mix can affect financial interpretation.
 
+**Transition to Dashboard 5 (Seif el deen to Mohamed Rashed):** "We now know who the patients are and who pays. The next question is what they are being treated for: which conditions and procedures sit behind these volumes." Seif el deen then hands over to Mohamed Rashed.
+
 ### 5:15-6:30 - Clinical demand drivers
 
 **Speaker:** Mohamed Rashed, Dashboard 5  
 Show the top diagnoses and procedures by volume, cost, average cost, and LOS. Use the decomposition tree to drill into total cost. Avoid naming a "worst" diagnosis; call it a high-volume or high-resource cohort.
+
+**Transition to Dashboard 6:** "The top-line volume becomes meaningful when we separate common cases from resource-intensive cases and then view them through clinical complexity."
 
 ### 6:30-7:45 - Complexity and risk
 
 **Speaker:** Mohamed Rashed, Dashboard 6  
 Show severity and risk-of-mortality distributions, the cost/LOS gradient by severity, top APR-DRGs/MDCs, and medical versus surgical differences. This is the explanation layer for why the demand drivers do not all have the same operational impact.
 
+**Transition to Dashboard 7 (Mohamed Rashed to Mohamed Abd El Qader):** "Once we know what creates the burden, we can locate it and identify the organizational contexts where intervention may be practical." Mohamed Rashed then hands over to Mohamed Abd El Qader.
+
 ### 7:45-9:00 - Geographic and facility hotspots
 
 **Speaker:** Mohamed Abd El Qader, Dashboard 7  
 Use the map and ranked facility/county/region views to locate concentration. Compare volume with average cost and LOS so the audience can distinguish "busy" from "high-burden."
+
+**Transition to Dashboard 8:** "Knowing which sites are busy, expensive or long-stay raises the next question: does who owns or operates a site help explain the difference?"
 
 ### 9:00-10:00 - Ownership and benchmark context
 
 **Speaker:** Mohamed Abd El Qader, Dashboard 8  
 Compare ownership and operator context on discharges, cost and stay. `Fact_CostTransparency` is not in the model, so show the operator and ownership comparisons that are built and state that comparable-case mean/median price benchmarking is a planned model extension.
 
+**Transition to Dashboard 9 (Mohamed Abd El Qader to Taqeyy):** "Ownership and operator context describe all discharges together, and averages across everyone can hide a small, high-intensity group. The next page isolates one: neonatal care." Mohamed Abd El Qader then hands over to Taqeyy.
+
 ### 10:00-11:15 - Neonatal priority cohort
 
 **Speaker:** Taqeyy, Dashboard 9  
 Show neonatal share, the LOS and cost comparison with other discharges, facility concentration, severity, payment mix, and the expired share card. Birth weight is not in the model, so there are no weight-band or scatter views. Say that out loud instead of leaving a gap. Neonatal diagnosis and disposition are not separate charts.
+
+**Transition to Dashboard 10:** "A priority cohort is a snapshot. The last question is how stable these patterns are over time, and what the next period might look like." Clear the Year slicer before moving on.
 
 ### 11:15-12:30 - What changed and what comes next
 
 **Speaker:** Taqeyy, Dashboard 10  
 Show YoY changes, payment mix by year, the facility change table and the scenario cards. The scenarios repeat the latest growth for one more year, and the latest year follows the 2020 pandemic dip, so some of that growth is recovery. Do not present them as a forecast.
 
+**Transition to the synthesis (Taqeyy to Hamza or the team):** "The dashboard does not replace operational judgment; it identifies the cohorts and sites where the next question, intervention, or resource decision should be focused. Here is what the ten pages tell us together." Return to page 1 with the filters cleared.
+
 ### 12:30-14:00 - Synthesis and recommendations
 
 **Speaker:** Hamza or the whole team  
 Summarize the three to five strongest observed patterns from the completed refresh. Then state the actions below, using the actual dashboard evidence to replace the bracketed prompts.
+
+**Transition to the limitations:** "Before we close, here is what these dashboards cannot tell us, and the two model extensions that would complete the picture."
 
 ### 14:00-15:00 - Limitations and close
 
@@ -151,6 +200,8 @@ Hamza owns the opening and the financial frame. His contribution is to answer:
 - Which facilities, diagnoses, or payer groups create the largest financial concentration?
 
 His transition should be: **"Now that we know the size and money involved, we need to understand the patient flow creating that burden."**
+
+**Hand-over:** opens the talk; hands over to Seif el deen after Dashboard 2; takes the synthesis back after Dashboard 10.
 
 He should deliver:
 
@@ -170,6 +221,8 @@ Seif el deen owns the patient-flow and payer context. His contribution is to ans
 
 His transition should be: **"The system burden is shaped not only by how many patients arrive, but by how long they stay and by the population and payer mix."**
 
+**Hand-over:** receives the cost-per-case and facility-type cost picture from Hamza; hands over to Mohamed Rashed after Dashboard 4 with the question of what the patients are treated for.
+
 He should avoid implying that race, ethnicity, or payment causes cost differences. Present them as descriptive stratifications.
 
 ### Mohamed Rashed - Dashboards 5 and 6: "Demand drivers and complexity"
@@ -182,6 +235,8 @@ Mohamed Rashed owns the clinical explanation layer. His contribution is to answe
 - Which MDCs or APR-DRGs should receive operational attention?
 
 His transition should be: **"The top-line volume becomes meaningful when we separate common cases from resource-intensive cases and then view them through clinical complexity."**
+
+**Hand-over:** receives the population and payer mix from Seif el deen; hands over to Mohamed Abd El Qader after Dashboard 6 with the question of where the burden sits.
 
 He should distinguish:
 
@@ -200,6 +255,8 @@ Mohamed Abd El Qader owns the location and organizational context. His contribut
 
 His transition should be: **"Once we know what creates the burden, we can locate it and identify the organizational contexts where intervention may be practical."**
 
+**Hand-over:** receives the severity and demand-driver picture from Mohamed Rashed; hands over to Taqeyy after Dashboard 8 with the question of which small cohort the averages hide.
+
 The transparency table is not in the model, and the page says so. Do not simulate mean/median transparency results from discharge totals. Remind the audience that operator rows do not sum to the total.
 
 ### Taqeyy - Dashboards 9 and 10: "Priority cohort and change"
@@ -212,6 +269,8 @@ Taqeyy owns the vulnerable-population and forward-looking close. Her contributio
 - Which patterns are stable enough to inform near-term planning?
 
 Her close should be: **"The dashboard does not replace operational judgment; it identifies the cohorts and sites where the next question, intervention, or resource decision should be focused."**
+
+**Hand-over:** receives the facility and ownership context from Mohamed Abd El Qader; hands back to Hamza or the team for the synthesis.
 
 The forward-looking cards are scenarios, not forecasts: there are four years of data and 2020 sits inside the pandemic dip.
 
@@ -235,6 +294,8 @@ The conclusion should contain no more than three main recommendations:
 ## 7. Presentation quality rules
 
 - Use the same Year, Facility Type, Facility County, and Facility slicer behavior on every page where applicable.
+- Open every page by reading its decision question aloud, and close it with the transition line from section 4, so each dashboard visibly hands over to the next.
+- Do not change the synced slicers between pages without saying so. Clear the Year slicer before the trend page.
 - Every page should have one sentence at the top stating the decision question.
 - Keep each page to a few purposeful visuals. The built pages run to about six to eight charts and tables beside the slicer rail, and several planned charts were folded into tooltips or dropped.
 - Use the same colors throughout: volume teal, costs navy, charges slate, LOS amber, neonatal violet.
