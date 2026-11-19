@@ -1,0 +1,57 @@
+table 'gold Dim_Admission'
+	lineageTag: 3b45f730-dd3b-4dde-9f55-3e8da8f23f9f
+
+	column AdmissionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b184061-5b8b-4eb6-a0c9-b8d7dbe35097
+		summarizeBy: none
+		sourceColumn: AdmissionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TypeOfAdmission
+		dataType: string
+		lineageTag: 95046f66-7c7f-4731-b0b6-13422fcf8556
+		summarizeBy: none
+		sourceColumn: TypeOfAdmission
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientDisposition
+		dataType: string
+		lineageTag: 1fceebdd-89b3-4d39-8a23-42bb258c34ee
+		summarizeBy: none
+		sourceColumn: PatientDisposition
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmergencyDepartmentIndicator
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b847e98-cebf-4752-b3f4-ba66b61758b9
+		summarizeBy: none
+		sourceColumn: EmergencyDepartmentIndicator
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Admission Pathway' = IF ( 'gold Dim_Admission'[EmergencyDepartmentIndicator] = 1, "Emergency", "Non-emergency" )
+		dataType: string
+		lineageTag: 5d1f6f0e-9a3c-4c2e-8b57-0c1e0f6a2001
+		summarizeBy: none
+
+	partition 'gold Dim_Admission' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Admission = Source{[Schema="gold",Item="Dim_Admission"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Admission,{"gold.Fact_Discharges"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"EmergencyDepartmentIndicator", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,762 @@
+table 'gold Fact_Discharges'
+	lineageTag: b31e58f5-7f92-4ed2-9b5d-1b271e970b82
+
+	measure 'Total Discharges' = COUNTROWS ( 'gold Fact_Discharges' )
+		formatString: #,0
+		displayFolder: 1 Core
+		lineageTag: 2c046603-e186-510a-8e82-3b5697ce8bc3
+
+	measure 'Total Charges' = SUM ( 'gold Fact_Discharges'[TotalCharges] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: c7df839f-0db8-56b6-a611-9864e5413769
+
+	measure 'Total Costs' = SUM ( 'gold Fact_Discharges'[TotalCosts] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: 92405097-0798-5862-a28f-2a8b0de3a98a
+
+	measure 'Average LOS' = AVERAGE ( 'gold Fact_Discharges'[LengthOfStay] )
+		formatString: 0.0
+		displayFolder: 1 Core
+		lineageTag: b7959d2f-ba92-5f02-8009-7d8db2c57703
+
+	measure 'Average Cost per Discharge' = DIVIDE ( [Total Costs], [Total Discharges] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: 6ccb2d6a-6b9d-5954-a80e-c2cb724d7a22
+
+	measure 'Average Charge per Discharge' = DIVIDE ( [Total Charges], [Total Discharges] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: 4f91366f-a9b9-5cd6-8450-43cdad7cb544
+
+	measure 'Cost-to-Charge Ratio' = DIVIDE ( [Total Costs], [Total Charges] )
+		formatString: 0.0%
+		displayFolder: 1 Core
+		lineageTag: e6d26b2e-9811-5a4f-84d1-908e1285636a
+
+	measure 'Charge-Cost Difference' = [Total Charges] - [Total Costs]
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: fc9a3901-dfb0-5403-b257-820978a02217
+
+	measure 'Average Total Cost' = AVERAGE ( 'gold Fact_Discharges'[TotalCosts] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: f35e595f-838a-5fae-8925-a2d1952002e0
+
+	measure 'Average Total Charge' = AVERAGE ( 'gold Fact_Discharges'[TotalCharges] )
+		formatString: "$"#,0
+		displayFolder: 1 Core
+		lineageTag: 4691d617-cf0d-527f-b470-4c61e11e9264
+
+	measure 'Average Cost-to-Charge Ratio' = AVERAGE ( 'gold Fact_Discharges'[CostToChargeRatio] )
+		formatString: 0.0%
+		displayFolder: 1 Core
+		lineageTag: 1a72aa8b-daef-5a35-b6eb-7600e2318323
+
+	measure 'Facility Count' = DISTINCTCOUNT ( 'gold Fact_Discharges'[FacilityKey] )
+		formatString: #,0
+		displayFolder: 1 Core
+		lineageTag: b0e61e0d-cd10-511c-9e8e-f75ad3a28a3b
+
+	measure 'Emergency Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Dim_Admission'[EmergencyDepartmentIndicator] = 1
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: fac1d173-baed-531f-a011-92a21a9e5b3f
+
+	measure 'Emergency Share' = DIVIDE ( [Emergency Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 651db80f-3800-598e-8ee4-e77180a782d4
+
+	measure 'Procedure Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Fact_Discharges'[HasProcedure] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: 82302e88-90d5-5f46-a23a-fc4f7d169255
+
+	measure 'Procedure Share' = DIVIDE ( [Procedure Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 7378bfee-a9b6-5fcd-bdc5-214322a40b04
+
+	measure 'Neonatal Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Fact_Discharges'[IsNeonate] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: 5d6feb15-baec-5489-a590-7b00f6b04dd2
+
+	measure 'Neonatal Share' = DIVIDE ( [Neonatal Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 95f30573-51ac-55cb-b607-b5fd00e7101d
+
+	measure 'Secondary Insurance Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Fact_Discharges'[HasSecondaryInsurance] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: d3824a33-959e-53f0-bb67-45f7527a9f66
+
+	measure 'Secondary Insurance Share' = DIVIDE ( [Secondary Insurance Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 82af8f99-972e-5310-89d5-eae4773b3b7c
+
+	measure 'Expired Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Dim_Admission'[PatientDisposition] = "Expired"
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: 2db2fb53-8bc7-56e7-836f-1a10a3853da6
+
+	measure 'Mortality Share' = DIVIDE ( [Expired Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 6f29f77f-6a24-533b-8321-127d76be01c8
+
+	measure 'Extreme Severity Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Dim_Severity'[AprSeverityOfIllnessCode] = 4
+			)
+		formatString: #,0
+		displayFolder: 2 Shares
+		lineageTag: fdde391a-559e-58d1-a096-613b0fa9f2c7
+
+	measure 'Extreme Severity Share' = DIVIDE ( [Extreme Severity Discharges], [Total Discharges] )
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 37516886-407d-51a5-b7c2-11f3f47ca03b
+
+	measure 'Top 5 Facilities Share' =
+			DIVIDE (
+			    SUMX (
+			        TOPN ( 5, ALLSELECTED ( 'gold Dim_Facility'[Facility_Name] ), [Total Discharges] ),
+			        [Total Discharges]
+			    ),
+			    CALCULATE ( [Total Discharges], ALLSELECTED ( 'gold Dim_Facility' ) )
+			)
+		formatString: 0.0%
+		displayFolder: 2 Shares
+		lineageTag: 2ddbbc5e-eee6-5017-81a0-07bf839b903a
+
+	measure 'Discharges Previous Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Discharges],
+			        FILTER (
+			            ALL ( 'gold Dim_Year'[Year] ),
+			            'gold Dim_Year'[Year] = SelectedYear - 1
+			        )
+			    )
+		formatString: #,0
+		displayFolder: 3 Time
+		lineageTag: 47db90fa-e6ed-5c06-a349-bb4a3fd55b47
+
+	measure 'Discharges Current Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Discharges],
+			        REMOVEFILTERS ( 'gold Dim_Year' ),
+			        'gold Dim_Year'[Year] = SelectedYear
+			    )
+		formatString: #,0
+		displayFolder: 3 Time
+		lineageTag: 9181757d-a66a-54b9-849a-67fb667e95d2
+
+	measure 'Discharges YoY %' = DIVIDE ( [Discharges Current Year] - [Discharges Previous Year], [Discharges Previous Year] )
+		formatString: 0.0%
+		displayFolder: 3 Time
+		lineageTag: 1c46e642-91ce-5b30-b7cd-801415f35e93
+
+	measure 'Discharges Change' =
+			IF (
+			    ISBLANK ( [Discharges Previous Year] ),
+			    BLANK (),
+			    [Discharges Current Year] - [Discharges Previous Year]
+			)
+		formatString: #,0
+		displayFolder: 3 Time
+		lineageTag: 664d756a-5870-52a8-b2f1-08c9bec0e865
+
+	measure 'Discharges Abs Change' = ABS ( [Discharges Change] )
+		formatString: #,0
+		displayFolder: 3 Time
+		lineageTag: 36d1682d-b5b5-512c-a38b-971a6c302f63
+
+	measure 'Charges Previous Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Charges],
+			        FILTER (
+			            ALL ( 'gold Dim_Year'[Year] ),
+			            'gold Dim_Year'[Year] = SelectedYear - 1
+			        )
+			    )
+		formatString: "$"#,0
+		displayFolder: 3 Time
+		lineageTag: c1df6c65-3755-5efc-9ad6-38508ed68f1a
+
+	measure 'Charges Current Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Charges],
+			        REMOVEFILTERS ( 'gold Dim_Year' ),
+			        'gold Dim_Year'[Year] = SelectedYear
+			    )
+		formatString: "$"#,0
+		displayFolder: 3 Time
+		lineageTag: 9e3e356a-f8dc-5256-9052-8254e479ab97
+
+	measure 'Charges YoY %' = DIVIDE ( [Charges Current Year] - [Charges Previous Year], [Charges Previous Year] )
+		formatString: 0.0%
+		displayFolder: 3 Time
+		lineageTag: a5904d53-c597-53c6-9691-69fa7853c60b
+
+	measure 'Costs Previous Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Costs],
+			        FILTER (
+			            ALL ( 'gold Dim_Year'[Year] ),
+			            'gold Dim_Year'[Year] = SelectedYear - 1
+			        )
+			    )
+		formatString: "$"#,0
+		displayFolder: 3 Time
+		lineageTag: ecfa704e-fb50-5ce2-ae24-40ae199aad7a
+
+	measure 'Costs Current Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Total Costs],
+			        REMOVEFILTERS ( 'gold Dim_Year' ),
+			        'gold Dim_Year'[Year] = SelectedYear
+			    )
+		formatString: "$"#,0
+		displayFolder: 3 Time
+		lineageTag: 8b73b1f1-ae88-5ad0-8b41-3232698ace54
+
+	measure 'Costs YoY %' = DIVIDE ( [Costs Current Year] - [Costs Previous Year], [Costs Previous Year] )
+		formatString: 0.0%
+		displayFolder: 3 Time
+		lineageTag: 7e20bc8b-7350-53e4-abe8-72b154c4c01b
+
+	measure 'Average LOS Previous Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Average LOS],
+			        FILTER (
+			            ALL ( 'gold Dim_Year'[Year] ),
+			            'gold Dim_Year'[Year] = SelectedYear - 1
+			        )
+			    )
+		formatString: 0.0
+		displayFolder: 3 Time
+		lineageTag: 75d8c63b-d7dc-59df-89c1-959aaeeb5c6c
+
+	measure 'Average LOS Current Year' =
+			VAR SelectedYear = MAX ( 'gold Dim_Year'[Year] )
+			RETURN
+			    CALCULATE (
+			        [Average LOS],
+			        REMOVEFILTERS ( 'gold Dim_Year' ),
+			        'gold Dim_Year'[Year] = SelectedYear
+			    )
+		formatString: 0.0
+		displayFolder: 3 Time
+		lineageTag: b4f8267a-7867-57fc-ad83-f839262fb476
+
+	measure 'Average LOS Change' =
+			IF (
+			    ISBLANK ( [Average LOS Previous Year] ),
+			    BLANK (),
+			    [Average LOS Current Year] - [Average LOS Previous Year]
+			)
+		formatString: +0.00;-0.00;0.00
+		displayFolder: 3 Time
+		lineageTag: 7f9356a0-0a00-542f-a583-1239ebc951a8
+
+	measure 'Scenario Discharges - Flat' = [Discharges Current Year]
+		formatString: #,0
+		displayFolder: 4 Scenario
+		lineageTag: c81ac8c9-5ad6-5eae-a03a-f1e17aa37f26
+
+	measure 'Scenario Discharges - Trend Continues' =
+			IF (
+			    ISBLANK ( [Discharges YoY %] ),
+			    BLANK (),
+			    [Discharges Current Year] * ( 1 + [Discharges YoY %] )
+			)
+		formatString: #,0
+		displayFolder: 4 Scenario
+		lineageTag: d302f7cd-46f3-5131-8768-c025dc2dd7b1
+
+	measure 'Scenario Costs - Trend Continues' =
+			IF (
+			    ISBLANK ( [Costs YoY %] ),
+			    BLANK (),
+			    [Costs Current Year] * ( 1 + [Costs YoY %] )
+			)
+		formatString: "$"#,0
+		displayFolder: 4 Scenario
+		lineageTag: b54c5672-3942-520f-aada-fd3674d50e52
+
+	measure 'Neonatal Average LOS' =
+			CALCULATE (
+			    [Average LOS],
+			    'gold Fact_Discharges'[IsNeonate] = TRUE ()
+			)
+		formatString: 0.0
+		displayFolder: 5 Neonatal
+		lineageTag: 026c8541-1387-58f7-b2de-3fa62075e28f
+
+	measure 'Neonatal Average Cost per Discharge' =
+			CALCULATE (
+			    [Average Cost per Discharge],
+			    'gold Fact_Discharges'[IsNeonate] = TRUE ()
+			)
+		formatString: "$"#,0
+		displayFolder: 5 Neonatal
+		lineageTag: 3d2bb078-22a2-5d34-9705-a992af6670f7
+
+	measure 'Neonatal Expired Discharges' =
+			CALCULATE (
+			    [Expired Discharges],
+			    'gold Fact_Discharges'[IsNeonate] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 5 Neonatal
+		lineageTag: 61abbc75-e7a6-5ba5-bc4e-d08740bdb708
+
+	measure 'Neonatal Mortality Share' = DIVIDE ( [Neonatal Expired Discharges], [Neonatal Discharges] )
+		formatString: 0.0%
+		displayFolder: 5 Neonatal
+		lineageTag: c4312f2a-f858-5307-b6e2-dead11ed6172
+
+	measure 'Open Date Missing Facilities' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Fact_Discharges'[FacilityKey] ),
+			    'gold Dim_Facility'[Is_Open_Date_Missing] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 6 Facility Quality
+		lineageTag: ecacdcba-c852-5956-a8b1-82cc024c2c7c
+
+	measure 'Location Missing Facilities' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Fact_Discharges'[FacilityKey] ),
+			    'gold Dim_Facility'[Is_Location_Missing] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 6 Facility Quality
+		lineageTag: be823ecc-5157-5ea9-8a5e-23d7feff95d7
+
+	measure 'Opened After Data Period Facilities' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Fact_Discharges'[FacilityKey] ),
+			    'gold Dim_Facility'[Opened_After_Data_Period] = TRUE ()
+			)
+		formatString: #,0
+		displayFolder: 6 Facility Quality
+		lineageTag: fe3428e5-cc6d-58bb-ba03-cb18971de9c0
+
+	measure 'Operator Count' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Bridge_Facility_Operator'[OperatorKey] ),
+			    TREATAS ( VALUES ( 'gold Fact_Discharges'[FacilityKey] ), 'gold Bridge_Facility_Operator'[FacilityKey] )
+			)
+		formatString: #,0
+		displayFolder: 7 Ownership
+		lineageTag: 3f84b054-6fe1-5932-9864-db20349fddd6
+
+	measure 'Cooperator Count' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Bridge_Facility_Cooperator'[CooperatorKey] ),
+			    TREATAS ( VALUES ( 'gold Fact_Discharges'[FacilityKey] ), 'gold Bridge_Facility_Cooperator'[FacilityKey] )
+			)
+		formatString: #,0
+		displayFolder: 7 Ownership
+		lineageTag: 46a5b15e-4a95-5176-a69f-04f48c09e865
+
+	measure 'Operator Facility Count' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Bridge_Facility_Operator'[FacilityKey] ),
+			    TREATAS ( VALUES ( 'gold Fact_Discharges'[FacilityKey] ), 'gold Bridge_Facility_Operator'[FacilityKey] )
+			)
+		formatString: #,0
+		displayFolder: 7 Ownership
+		lineageTag: 461845c2-cae7-5d5c-85cd-ea44e9d2ff3f
+
+	measure 'Cooperator Facility Count' =
+			CALCULATE (
+			    DISTINCTCOUNT ( 'gold Bridge_Facility_Cooperator'[FacilityKey] ),
+			    TREATAS ( VALUES ( 'gold Fact_Discharges'[FacilityKey] ), 'gold Bridge_Facility_Cooperator'[FacilityKey] )
+			)
+		formatString: #,0
+		displayFolder: 7 Ownership
+		lineageTag: 1119ea59-8653-50a3-844b-b9c11ffc836d
+
+	measure 'Operator Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    CROSSFILTER ( 'gold Bridge_Facility_Operator'[FacilityKey], 'gold Dim_Facility'[FacilityKey], BOTH )
+			)
+		formatString: #,0
+		displayFolder: 7 Ownership
+		lineageTag: 9fba574d-c1a6-5461-9fd2-cf6668f2c3b5
+
+	measure 'Operator Costs' =
+			CALCULATE (
+			    [Total Costs],
+			    CROSSFILTER ( 'gold Bridge_Facility_Operator'[FacilityKey], 'gold Dim_Facility'[FacilityKey], BOTH )
+			)
+		formatString: "$"#,0
+		displayFolder: 7 Ownership
+		lineageTag: 3d512a03-e09b-5f95-be47-573413c9b94b
+
+	measure 'Operator Average Cost per Discharge' = DIVIDE ( [Operator Costs], [Operator Discharges] )
+		formatString: "$"#,0
+		displayFolder: 7 Ownership
+		lineageTag: 57f7bb0d-9968-5691-b8af-429ffa27718a
+
+	measure 'Operator Average LOS' =
+			CALCULATE (
+			    [Average LOS],
+			    CROSSFILTER ( 'gold Bridge_Facility_Operator'[FacilityKey], 'gold Dim_Facility'[FacilityKey], BOTH )
+			)
+		formatString: 0.0
+		displayFolder: 7 Ownership
+		lineageTag: 55d9c200-5dbb-540b-b96e-2abc61c4a380
+
+	measure 'Data Period' =
+			VAR FirstYear = CALCULATE ( MIN ( 'gold Dim_Year'[Year] ), ALL ( 'gold Dim_Year' ) )
+			VAR LastYear = CALCULATE ( MAX ( 'gold Dim_Year'[Year] ), ALL ( 'gold Dim_Year' ) )
+			RETURN
+			    FirstYear & "-" & LastYear
+		displayFolder: 8 Footer
+		lineageTag: b0409b5d-a478-5762-821d-e823efe18c5d
+
+	measure 'Footer Text' =
+			"Data period: " & [Data Period]
+			    & "  |  Data loaded: " & FORMAT ( MAX ( 'gold Fact_Discharges'[LoadDate] ), "d mmm yyyy" )
+			    & "  |  De-identified inpatient discharge data (NY SPARCS)  |  Charges are not collected revenue; patterns are descriptive, not causal."
+		displayFolder: 8 Footer
+		lineageTag: 0e1c6288-6d0b-564a-88d8-de336822626d
+
+	measure 'Emergency Average LOS' =
+			CALCULATE (
+			    [Average LOS],
+			    'gold Dim_Admission'[EmergencyDepartmentIndicator] = 1
+			)
+		formatString: 0.0
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: f6ac716a-a633-54bc-837d-e93179df0f06
+
+	measure 'Non-Emergency Average LOS' =
+			CALCULATE (
+			    [Average LOS],
+			    'gold Dim_Admission'[EmergencyDepartmentIndicator] = 0
+			)
+		formatString: 0.0
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: 625bbb64-49bc-513c-b28e-e823bcd50c6e
+
+	measure 'Ranked Average LOS' = IF ( [Total Discharges] >= 100, [Average LOS] )
+		formatString: 0.0
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: f22f5981-0017-52ff-9956-4d11b560d5d7
+
+	measure 'Ranked Average Cost per Discharge' = IF ( [Total Discharges] >= 100, [Average Cost per Discharge] )
+		formatString: "$"#,0
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: 00f6c92b-945c-5b9b-9195-4dcfbbf01850
+
+	measure 'Ranked Extreme Severity Share' = IF ( [Total Discharges] >= 100, [Extreme Severity Share] )
+		formatString: 0.0%
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: 0ea275ec-4e91-5875-8641-7d31becc72f3
+
+	measure 'Unmapped Facility Discharges' =
+			CALCULATE (
+			    [Total Discharges],
+			    'gold Dim_Facility'[Facility_Name] = BLANK ()
+			)
+		formatString: #,0
+		displayFolder: 6 Facility Quality
+		lineageTag: 3f5f1c58-cb6b-5d3f-8502-5a17ee7833a0
+
+	measure 'Ranked Discharges Abs Change' =
+			VAR Cur = [Discharges Current Year]
+			VAR Prev = [Discharges Previous Year]
+			RETURN
+			    IF ( Cur >= 100 && Prev >= 100, ABS ( Cur - Prev ) )
+		formatString: #,0
+		displayFolder: 9 Comparison and Ranking
+		lineageTag: 5ac4af6f-56b2-5127-bbd8-32918ac34ccc
+
+	column DischargeKey
+		dataType: int64
+		formatString: 0
+		lineageTag: e0dfd97b-9337-4149-b83e-b2eab58cab6d
+		summarizeBy: count
+		sourceColumn: DischargeKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column HospitalDischargesKey_NK
+		dataType: string
+		lineageTag: a8e440d3-adb9-4923-b25c-83195fc63d6f
+		summarizeBy: none
+		sourceColumn: HospitalDischargesKey_NK
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 87d5989f-cac3-4ec7-9de0-02783a2abb05
+		summarizeBy: none
+		sourceColumn: YearKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column FacilityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 92646909-e689-4b29-afc4-e35a02ab1172
+		summarizeBy: none
+		sourceColumn: FacilityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PatientKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f1b3807-f306-4eca-a1f1-236c80fce116
+		summarizeBy: none
+		sourceColumn: PatientKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AdmissionKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 52edd4bf-1eea-4cb5-b744-91dfb18c8469
+		summarizeBy: none
+		sourceColumn: AdmissionKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a27d37b7-79d1-4c41-bf33-7be0240082f1
+		summarizeBy: none
+		sourceColumn: PaymentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiagnosisKey
+		dataType: int64
+		formatString: 0
+		lineageTag: d2d5626f-4f79-4bbd-928b-1cf526ac46a0
+		summarizeBy: none
+		sourceColumn: DiagnosisKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcedureKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5bfdd699-64ca-43f0-9758-77abc105e220
+		summarizeBy: none
+		sourceColumn: ProcedureKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprDrgKey
+		dataType: int64
+		formatString: 0
+		lineageTag: a4103e79-4f92-4bf0-8613-e009273ff685
+		summarizeBy: none
+		sourceColumn: AprDrgKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column AprMdcKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bff01c4f-1678-496b-9191-a7cc4667b613
+		summarizeBy: none
+		sourceColumn: AprMdcKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeverityKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 93c01f6b-6178-44a3-b2ae-7a4c67a1dcf0
+		summarizeBy: none
+		sourceColumn: SeverityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MedicalSurgicalKey
+		dataType: int64
+		formatString: 0
+		lineageTag: efd817d7-7ab1-426e-894a-f43dcbd5fe6a
+		summarizeBy: none
+		sourceColumn: MedicalSurgicalKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column LengthOfStay
+		dataType: int64
+		formatString: 0
+		lineageTag: 71aa42c1-d213-4aec-a3a1-70af792acc67
+		summarizeBy: average
+		sourceColumn: LengthOfStay
+
+		annotation SummarizationSetBy = User
+
+	column TotalCharges
+		dataType: double
+		lineageTag: 237edd55-7a3e-4600-8b36-2715a19fe438
+		summarizeBy: sum
+		sourceColumn: TotalCharges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TotalCosts
+		dataType: double
+		lineageTag: 2e340aae-9095-4119-a12f-9e118d3d5bec
+		summarizeBy: sum
+		sourceColumn: TotalCosts
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostToChargeRatio
+		dataType: double
+		lineageTag: fdf17f4c-af56-4197-a842-9e3e757d91af
+		summarizeBy: sum
+		sourceColumn: CostToChargeRatio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CostChargeDifference
+		dataType: double
+		lineageTag: 810d0c86-dfb9-4f19-bd91-3e5edccca28c
+		summarizeBy: sum
+		sourceColumn: CostChargeDifference
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsNeonate
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 18ea1dc2-f5da-4c8a-b2e9-4b0a5445ee51
+		summarizeBy: none
+		sourceColumn: IsNeonate
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasSecondaryInsurance
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b7ff3879-ea6f-4f3c-87a5-22ba88a02797
+		summarizeBy: none
+		sourceColumn: HasSecondaryInsurance
+
+		annotation SummarizationSetBy = Automatic
+
+	column HasProcedure
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3a091c63-2d22-4cd7-b2ed-02d1b48fefbb
+		summarizeBy: none
+		sourceColumn: HasProcedure
+
+		annotation SummarizationSetBy = Automatic
+
+	column LoadDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6c27cef0-975a-4b7d-9304-b5fc30406401
+		summarizeBy: none
+		sourceColumn: LoadDate
+
+		variation Variation
+			isDefault
+			relationship: 21352086-d49e-4c3f-a9f9-a672f95d13b7
+			defaultHierarchy: LocalDateTable_6f4f3d2c-2a79-4a63-b5e6-242e249299d2.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'LOS Band' = SWITCH ( TRUE (), 'gold Fact_Discharges'[LengthOfStay] <= 1, "1 day", 'gold Fact_Discharges'[LengthOfStay] <= 3, "2-3 days", 'gold Fact_Discharges'[LengthOfStay] <= 7, "4-7 days", 'gold Fact_Discharges'[LengthOfStay] <= 14, "8-14 days", "15+ days" )
+		dataType: string
+		lineageTag: 5d1f6f0e-9a3c-4c2e-8b57-0c1e0f6a1001
+		summarizeBy: none
+		sortByColumn: 'LOS Band Order'
+
+	column 'LOS Band Order' = SWITCH ( TRUE (), 'gold Fact_Discharges'[LengthOfStay] <= 1, 1, 'gold Fact_Discharges'[LengthOfStay] <= 3, 2, 'gold Fact_Discharges'[LengthOfStay] <= 7, 3, 'gold Fact_Discharges'[LengthOfStay] <= 14, 4, 5 )
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d1f6f0e-9a3c-4c2e-8b57-0c1e0f6a1002
+		summarizeBy: none
+
+	column 'Neonate Cohort' = IF ( 'gold Fact_Discharges'[IsNeonate] = TRUE (), "Neonate", "Non-neonate" )
+		dataType: string
+		lineageTag: 5d1f6f0e-9a3c-4c2e-8b57-0c1e0f6a1003
+		summarizeBy: none
+
+	partition 'gold Fact_Discharges' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Fact_Discharges = Source{[Schema="gold",Item="Fact_Discharges"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Fact_Discharges,{"gold.Dim_Admission", "gold.Dim_AprDrg", "gold.Dim_AprMdc", "gold.Dim_Diagnosis", "gold.Dim_Facility", "gold.Dim_MedicalSurgical", "gold.Dim_Patient", "gold.Dim_Payment", "gold.Dim_Procedure", "gold.Dim_Severity", "gold.Dim_Year"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"LoadDate", type date}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type",{"BirthWeight"})
+				in
+				    #"Removed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

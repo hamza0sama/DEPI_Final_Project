@@ -1,0 +1,79 @@
+table 'gold Dim_Operator'
+	lineageTag: 51cc216c-aa3a-44c9-a6aa-e5664181cd79
+
+	column OperatorKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 82f4ad46-a331-4e2d-aa1a-69828fbee13a
+		summarizeBy: none
+		sourceColumn: OperatorKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator_Key_NK
+		dataType: int64
+		formatString: 0
+		lineageTag: c8dacc96-6b09-45ab-88b8-0cc5d051730e
+		summarizeBy: none
+		sourceColumn: Operator_Key_NK
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator_Name
+		dataType: string
+		lineageTag: dd4db69f-1123-4397-8c4e-996d39f4a0fa
+		summarizeBy: none
+		sourceColumn: Operator_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator_Address_1
+		dataType: string
+		lineageTag: 300c02f2-da1a-4353-b48b-c49979705aba
+		summarizeBy: none
+		sourceColumn: Operator_Address_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator_City
+		dataType: string
+		lineageTag: bae038e6-6a18-43e3-a047-c29af6ba31d3
+		summarizeBy: none
+		sourceColumn: Operator_City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator_Zip_Code
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c6383aa-f21b-430f-8b46-cf40c1ffbc0b
+		summarizeBy: none
+		sourceColumn: Operator_Zip_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ownership_Type
+		dataType: string
+		lineageTag: d60de2b7-809c-41ad-99d4-f5136d37d43d
+		summarizeBy: none
+		sourceColumn: Ownership_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Operator' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Operator = Source{[Schema="gold",Item="Dim_Operator"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Operator,{"gold.Bridge_Facility_Operator", "Operator_State"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"Operator_Key_NK", Int64.Type}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Changed Type",{"Operator_Address_2"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Removed Columns1",{{"Operator_Zip_Code", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

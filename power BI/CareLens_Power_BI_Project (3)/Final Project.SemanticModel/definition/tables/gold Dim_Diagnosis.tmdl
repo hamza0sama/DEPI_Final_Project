@@ -1,0 +1,42 @@
+table 'gold Dim_Diagnosis'
+	lineageTag: b31f367a-f9b7-4e11-bd99-3ffa7e40364c
+
+	column DiagnosisKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 315d0364-dd7f-434a-9231-2de63702d7b2
+		summarizeBy: none
+		sourceColumn: DiagnosisKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CcsrDiagnosisCode
+		dataType: string
+		lineageTag: 065f2cfc-42d3-4502-9aeb-6b5d0e2f58d0
+		summarizeBy: none
+		sourceColumn: CcsrDiagnosisCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column CcsrDiagnosisDescription
+		dataType: string
+		lineageTag: 5746f0d1-3b5a-4ae4-924e-a670bcb766b5
+		summarizeBy: none
+		sourceColumn: CcsrDiagnosisDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'gold Dim_Diagnosis' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("196.221.145.204,1433", "HealthCareAnalysis"),
+				    gold_Dim_Diagnosis = Source{[Schema="gold",Item="Dim_Diagnosis"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(gold_Dim_Diagnosis,{"gold.Fact_Discharges"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

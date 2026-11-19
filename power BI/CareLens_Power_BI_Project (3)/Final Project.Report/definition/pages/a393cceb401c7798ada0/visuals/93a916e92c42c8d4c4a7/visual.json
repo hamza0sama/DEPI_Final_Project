@@ -1,0 +1,161 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "93a916e92c42c8d4c4a7",
+  "position": {
+    "x": 736,
+    "y": 378,
+    "z": 1900,
+    "height": 248,
+    "width": 532,
+    "tabOrder": 1900
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Dim_Operator"
+                    }
+                  },
+                  "Property": "Ownership_Type"
+                }
+              },
+              "queryRef": "gold Dim_Operator.Ownership_Type",
+              "nativeQueryRef": "Ownership_Type",
+              "displayName": "Ownership",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Operator Facility Count"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Operator Facility Count",
+              "nativeQueryRef": "Operator Facility Count",
+              "displayName": "Facilities",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Operator Discharges"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Operator Discharges",
+              "nativeQueryRef": "Operator Discharges",
+              "displayName": "Discharges",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Operator Average Cost per Discharge"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Operator Average Cost per Discharge",
+              "nativeQueryRef": "Operator Average Cost per Discharge",
+              "displayName": "Avg cost",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold Fact_Discharges"
+                    }
+                  },
+                  "Property": "Operator Average LOS"
+                }
+              },
+              "queryRef": "gold Fact_Discharges.Operator Average LOS",
+              "nativeQueryRef": "Operator Average LOS",
+              "displayName": "Avg LOS",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Ownership type: facilities, discharges, cost and stay'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "12D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0F172A'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
