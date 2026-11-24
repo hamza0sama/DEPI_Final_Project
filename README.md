@@ -103,9 +103,9 @@ analytical view of expected patient length of stay. The notebooks cover:
 
 Run the notebooks in this order:
 
-1. [Cleaning.ipynb](./Cleaning.ipynb)
-2. [Feature Engineering.ipynb](./Feature%20Engineering.ipynb)
-3. [Length of stay.ipynb](./Length%20of%20stay.ipynb)
+1. [Cleaning.ipynb](./blob/main/Python//Cleaning.ipynb)
+2. [Feature Engineering.ipynb](./blob/main/Python//Feature%20Engineering.ipynb)
+3. [Length of stay.ipynb](./blob/main/Python//Length%20of%20stay.ipynb)
 
 ### Python requirements
 
